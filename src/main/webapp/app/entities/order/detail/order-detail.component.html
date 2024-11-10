@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (order()) {
+      <div>
+        <h2 data-cy="orderDetailsHeading"><span jhiTranslate="penaCoffeeApp.order.detail.title">Order</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ order()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="penaCoffeeApp.order.orderDate">Order Date</span></dt>
+          <dd>
+            <span>{{ order()!.orderDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="penaCoffeeApp.order.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'penaCoffeeApp.OrderStatus.' + (order()!.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PAID: 'PAID', SHIPPED: 'SHIPPED', DELIVERED: 'DELIVERED', CANCELLED: 'CANCELLED' }[
+                order()!.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="penaCoffeeApp.order.totalAmount">Total Amount</span></dt>
+          <dd>
+            <span>{{ order()!.totalAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="penaCoffeeApp.order.customer">Customer</span></dt>
+          <dd>
+            @if (order()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', order()!.customer?.id, 'view']">{{ order()!.customer?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/order', order()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

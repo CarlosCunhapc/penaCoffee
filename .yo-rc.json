@@ -1,0 +1,20 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "PenaCoffee",
+    "buildTool": "maven",
+    "clientFramework": "angular",
+    "devDatabaseType": "h2Disk",
+    "devServerPort": 4200,
+    "entities": ["Product", "Customer", "Order", "OrderItem", "Payment"],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "NGEwNDQ5NGFjZDZlMDkxZWU1MTdhYTUwNzJhYTY4OTljNTE1YmE0Yjc4MDNjZDU5ZDU1YzI5YTkxMmM0ZjI5ZTg0YjkxMWIxNjEwMDdjMjU3ZjljYmQ3ZjIzMzJjMzBiMzI4ZmQ1ZWYyNDBmNzMxOWQ1OWUzNDJkYWMxMjczNTE=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1731197737000,
+    "nativeLanguage": "en",
+    "packageFolder": "com/example/penacoffee",
+    "packageName": "com.example.penacoffee",
+    "prodDatabaseType": "postgresql"
+  }
+}

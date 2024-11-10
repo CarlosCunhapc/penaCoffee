@@ -1,0 +1,78 @@
+application {
+  config {
+    baseName PenaCoffee,
+    applicationType monolith,
+    packageName com.example.penacoffee,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    devDatabaseType h2Disk,
+    buildTool maven,
+    clientFramework angular
+  }
+
+  entities Product, Customer, Order, OrderItem, Payment
+}
+
+entity Product {
+  name String required,
+  description String,
+  price BigDecimal required,
+  stock Integer required,
+  productType ProductType required
+}
+
+enum ProductType {
+  BEAN, GROUND, SNACK
+}
+
+entity Customer {
+  firstName String required,
+  lastName String required,
+  email String required pattern(/[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}/),
+  phoneNumber String
+}
+
+entity Order {
+  orderDate Instant required,
+  status OrderStatus required,
+  totalAmount BigDecimal required
+}
+
+enum OrderStatus {
+  PENDING, PAID, SHIPPED, DELIVERED, CANCELLED
+}
+
+entity OrderItem {
+  quantity Integer required,
+  totalPrice BigDecimal required
+}
+
+entity Payment {
+  paymentDate Instant required,
+  amount BigDecimal required,
+  paymentMethod PaymentMethod required
+}
+
+enum PaymentMethod {
+  CREDIT_CARD, DEBIT_CARD, CASH, PAYPAL
+}
+
+relationship ManyToOne {
+  Order{customer} to Customer
+}
+
+relationship OneToMany {
+  Order{items} to OrderItem{order required}
+}
+
+relationship ManyToOne {
+  OrderItem{product required} to Product
+}
+
+relationship ManyToOne {
+  Payment{order required} to Order
+}
+
+service all with serviceClass
+paginate Product, Order, Customer with pagination
+dto * with mapstruct

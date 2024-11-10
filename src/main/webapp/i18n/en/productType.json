@@ -1,0 +1,10 @@
+{
+  "penaCoffeeApp": {
+    "ProductType": {
+      "null": "",
+      "BEAN": "BEAN",
+      "GROUND": "GROUND",
+      "SNACK": "SNACK"
+    }
+  }
+}
